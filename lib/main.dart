@@ -17,11 +17,40 @@ class Home extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.amberAccent,
       ),
-      body: Center(child: Image.asset('assets/space_2.jpg')),
+      body: Container(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                child: Text('Hello World'),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 10.0),
+                color: Colors.yellow[500],
+              ),
+              Container(
+                  color: Colors.blue[500],
+                  height: 200,
+                  width: 200,
+                  child: Center(child: Image.asset('assets/space_2.jpg'))),
+              Container(
+                  color: Colors.grey[500],
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10.0),
+                  margin: const EdgeInsets.all(10.0),
+                  child: IconButton(
+                    onPressed: () {
+                      print('clicked!');
+                    },
+                    icon: const Icon(Icons.alternate_email),
+                    color: Colors.amber,
+                  )),
+            ]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Text('Click'),
         backgroundColor: Colors.red[600],
+        child: const Text('Click'),
       ),
     );
   }
