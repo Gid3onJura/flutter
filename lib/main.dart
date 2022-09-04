@@ -2,56 +2,102 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Home(),
+    home: BusinessCard(),
   ));
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class BusinessCard extends StatelessWidget {
+  final Color _backgroundColor = Color(0xff165954);
+  final Color _backgroundColorHeadline = Color(0xffed6b5b);
+  final Color _textColorText = Color(0x76F9AD66);
+  final Color _textColorHighlightedText = Color(0xfff9ac66);
+  final double _letterSpacing = 2.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: this._backgroundColor,
       appBar: AppBar(
-        title: const Text('My First App'),
+        title: Text(
+          'People ID Card',
+          style: TextStyle(color: this._textColorHighlightedText),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: this._backgroundColorHeadline,
+        elevation: 0.0,
       ),
-      body: Container(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
+      body: Padding(
+          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/space_2.jpg'),
+                  radius: 50.0,
+                ),
+              ),
+              Divider(height: 90.0, color: this._backgroundColorHeadline),
               Container(
-                child: Text('Hello World'),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 10.0),
-                color: Colors.yellow[500],
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                child: Text(
+                  'Name'.toUpperCase(),
+                  style: TextStyle(
+                      color: this._textColorText,
+                      letterSpacing: this._letterSpacing),
+                ),
               ),
               Container(
-                  color: Colors.blue[500],
-                  height: 200,
-                  width: 200,
-                  child: Center(child: Image.asset('assets/space_2.jpg'))),
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                child: Text(
+                  'Jon Doe',
+                  style: TextStyle(
+                      color: this._textColorHighlightedText,
+                      letterSpacing: this._letterSpacing,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               Container(
-                  color: Colors.grey[500],
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
-                  margin: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () {
-                      print('clicked!');
-                    },
-                    icon: const Icon(Icons.alternate_email),
-                    color: Colors.amber,
-                  )),
-            ]),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.red[600],
-        child: const Text('Click'),
-      ),
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                child: Text(
+                  'Current job title'.toUpperCase(),
+                  style: TextStyle(
+                      color: this._textColorText,
+                      letterSpacing: this._letterSpacing),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                child: Text(
+                  'Software Developer',
+                  style: TextStyle(
+                      color: this._textColorHighlightedText,
+                      letterSpacing: this._letterSpacing,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.email,
+                    color: this._textColorHighlightedText,
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      'web@gmail.com',
+                      style: TextStyle(
+                          color: this._textColorHighlightedText,
+                          fontSize: 18.0,
+                          letterSpacing: this._letterSpacing),
+                    ),
+                  )
+                ],
+              )
+            ],
+          )),
     );
   }
 }
