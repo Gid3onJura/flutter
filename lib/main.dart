@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'quote.dart';
+import 'quote_card.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: QuoteList(),
   ));
 }
@@ -14,10 +16,10 @@ class QuoteList extends StatefulWidget {
 }
 
 class _QuoteListState extends State<QuoteList> {
-  List<String> quotes = [
-    'Rechne immer mit dem Schlimmsten',
-    'Lebe dein Leben',
-    'Lorum ipsum'
+  List<Quote> quotes = [
+    Quote('Rechne immer mit dem Schlimmsten', 'Oscar Wilde'),
+    Quote('Lebe dein Leben', 'James Dean'),
+    Quote('Lorum ipsum Lorum ipsum Lorum ipsum Lorum ipsum', 'Lorem ipsum'),
   ];
 
   @override
@@ -25,14 +27,20 @@ class _QuoteListState extends State<QuoteList> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Quotes'),
+        title: const Text('Quotes'),
         centerTitle: true,
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) => {
-          return Text(quote);
-        }).toList(),
+        children: quotes
+            .map((quote) => QuoteCard(
+                quote: quote,
+                delete: () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }))
+            .toList(),
       ),
     );
   }
