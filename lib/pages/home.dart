@@ -8,8 +8,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context)!.settings.arguments;
+    print(data);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -20,7 +25,11 @@ class _HomeState extends State<Home> {
               },
               icon: Icon(Icons.edit_location),
               label: Text('edit location'),
-            )
+            ),
+            SizedBox(height: 20.0),
+            Row(
+              children: [],
+            ),
           ],
         ),
       ),

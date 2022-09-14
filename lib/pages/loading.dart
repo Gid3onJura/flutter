@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -13,29 +11,44 @@ class Loading extends StatefulWidget {
 }
 
 class LocationData {
-  int flag;
+  String flag;
   String url;
 
   LocationData({required this.flag, required this.url});
 }
 
 class _LoadingState extends State<Loading> {
-  Map locationData = {'berlin': LocationData(flag: 276, url: 'Berlin/Europe')};
+  Map locationData = {
+    'berlin': {'flag': '276', 'url': 'Europe/Berlin'}
+  };
 
-  void setUpWorldTime() {
+  void setUpWorldTime() async {
     WorldTime instance = WorldTime(
         location: 'Berlin',
-        flag: locationData['berlin'].flag,
-        url: locationData['berlin'].url);
+        flag:
+            'https://countryflagsapi.com/svg/${locationData['berlin']['flag']}',
+        url: locationData['berlin']['url']);
+
+    await instance.getTime();
+    Navigator.of(context).pushNamed('/home', arguments: {
+      'loaction': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+    });
   }
 
   @override
   void initState() {
     super.initState();
+    setUpWorldTime();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('loading screen...'));
+    return Scaffold(
+        body: Padding(
+      padding: EdgeInsets.all(60.0),
+      child: Text('loading...'),
+    ));
   }
 }

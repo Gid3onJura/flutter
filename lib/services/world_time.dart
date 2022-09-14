@@ -1,6 +1,7 @@
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'dart:core';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class WorldTime {
   String location = ''; // location name for the UI
@@ -10,17 +11,24 @@ class WorldTime {
 
   WorldTime({required this.location, required this.flag, required this.url});
 
-  void getTime() async {
-    Response response =
-        await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
-    Map data = jsonDecode(response.body);
+  Future<void> getTime() async {
+    try {
+      initializeDateFormatting();
+      Response response =
+          await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
 
-    String datetime = data['datetime'];
-    String offset = data['utc_offset'].substring(1, 3);
+      Map data = jsonDecode(response.body);
 
-    DateTime now = DateTime.parse(datetime);
-    now = now.add(Duration(hours: int.parse(offset)));
+      String datetime = data['datetime'];
+      String offset = data['utc_offset'].substring(1, 3);
 
-    time = now.toString();
+      DateTime now = DateTime.parse(datetime);
+      now = now.add(Duration(hours: int.parse(offset)));
+
+      time = DateFormat.yMd('de_DE').format(now);
+    } catch (error) {
+      print(error);
+      time = 'keine Daten';
+    }
   }
 }
