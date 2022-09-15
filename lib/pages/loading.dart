@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:playground/pages/home.dart';
 import 'dart:convert';
 import 'package:playground/services/world_time.dart';
 
@@ -30,11 +31,18 @@ class _LoadingState extends State<Loading> {
         url: locationData['berlin']['url']);
 
     await instance.getTime();
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => Home(arguments: {
+              'location': instance.location,
+              'flag': instance.flag,
+              'time': instance.time,
+            })));
+    /*
     Navigator.of(context).pushNamed('/home', arguments: {
       'loaction': instance.location,
       'flag': instance.flag,
       'time': instance.time,
-    });
+    });*/
   }
 
   @override

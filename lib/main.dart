@@ -4,16 +4,21 @@ import 'package:playground/pages/home.dart';
 import 'package:playground/pages/loading.dart';
 
 void main() {
+  const Map defaultLocation = {
+    'location': 'Berlin',
+    'flag': 'https://countryflagsapi.com/svg/276',
+    'time': 'Europe/Berlin',
+  };
   runApp(
     MaterialApp(
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const Loading(),
-          '/home': (context) => const Home(),
-          '/location': (context) => const ChooseLocation(),
-        },
-        onGenerateRoute: (settings) {
-          print(settings);
-        }),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Loading(),
+        '/home': (context) => Home(
+              arguments: defaultLocation,
+            ),
+        '/location': (context) => const ChooseLocation(),
+      },
+    ),
   );
 }

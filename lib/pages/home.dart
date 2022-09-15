@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final Map arguments;
+
+  Home({super.key, required this.arguments});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  Map data = {};
-
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)!.settings.arguments;
-    print(data);
+    //data = ModalRoute.of(context)!.settings.arguments;
+    //print(ModalRoute.of(context)!.settings.arguments.runtimeType);
 
     return Scaffold(
       body: SafeArea(
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(height: 20.0),
             Row(
-              children: [],
+              children: [Text(widget.arguments['location'].toString())],
             ),
           ],
         ),
